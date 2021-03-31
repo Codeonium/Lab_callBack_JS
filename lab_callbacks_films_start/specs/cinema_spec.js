@@ -28,12 +28,81 @@ describe('Cinema', function () {
     assert.deepStrictEqual(actual, films);
   });
 
-  it('should be able to get a list of film titles');
-  it('should be able to find a film by title');
-  it('should be able to filter films by genre');
-  it('should be able to check whether there are some films from a particular year');
-  it('should be able to check whether there are no films from a particular year');
-  it('should be able to check whether all films are over a particular length');
-  it('should be able to calculate total running time of all films');
+  it('should be able to get a list of film titles', function(){
+    const filmList = []
+    films.forEach((films) => {
+    filmList.push(films)
+    })
+    const actual = cinema.films;
+    assert.deepStrictEqual(actual, filmList);
+
+  });
+
+  it('should be able to find a film by title', function(){
+    const foundFilm = films.filter((film) => {
+      return film.title === 'Dunkirk'
+    })
+    const actual = [dunkirk];
+    assert.deepStrictEqual(actual, foundFilm);
+
+  });
+
+  it('should be able to filter films by genre', function(){
+    const foundFilm = films.filter((film) => {
+      return film.genre === 'drama'
+    })
+    const actual = [moonlight, trainspotting];
+    assert.deepStrictEqual(actual, foundFilm);
+  });
+  
+  it('should be able to check whether there are some films from a particular year', function(){
+    let answer;
+    const foundFilm = films.filter((film) => {
+      return film.year === 2016 
+    })
+    if (foundFilm.length != 0) {
+      answer = true
+    } else {
+      answer = false
+    };
+    const actual = true;
+    assert.deepStrictEqual(actual, answer);
+  });
+  
+  it('should be able to check whether there are no films from a particular year', function(){
+    let answer;
+    const foundFilm = films.filter((film) => {
+      return film.year === 2013 
+    })
+    if (foundFilm.length != 0) {
+      answer = true
+    } else {
+      answer = false
+    };
+    const actual = false;
+    assert.deepStrictEqual(actual, answer);
+  });
+  
+  it('should be able to check whether all films are over a particular length', function(){
+    const foundFilm = films.filter((film) =>{
+      return film.length > 120
+    });
+    if (foundFilm.length != films.length) {
+      answer = false
+    } else {
+      answer = true
+    };
+    const actual = false;
+    assert.deepStrictEqual(actual, answer);
+  });
+  
+  it('should be able to calculate total running time of all films', function(){
+    const foundFilm = films.reduce((runningTotal, film) => {
+      return runningTotal + film.length 
+  }, 0)
+  const actual = 622;
+  assert.deepStrictEqual(actual, foundFilm);
+
+  });
 
 });
